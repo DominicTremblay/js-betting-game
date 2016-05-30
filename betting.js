@@ -16,12 +16,13 @@ $(document).ready(function(){
 
     randomNumber = Math.floor((Math.random() * 10) + 1);
 
-    getPlayerInput();
+    if (getPlayerInput()) {
 
-    if (enoughMoney())
-      result();
-    else
-      endGame();
+      if (enoughMoney())
+        result();
+      else
+        endGame();
+    }
 
     $('#bankroll').text("Bankroll: " + player.bankroll + "\$"); 
 
@@ -43,9 +44,38 @@ $(document).ready(function(){
 
   function getPlayerInput(){
 
-    player.bet = Number($('#bet').val());
-    player.guessNb = Number($('#guessNb').val());
+    var bet = validateBet(Number($('#bet').val()));
+    var guessNb = validateGuess(Number($('#guessNb').val()));
+    
+    if (bet !== false && guessNb !== false) {
+      player.bet = bet;
+      player.guessNb = guessNb;
+      return true;
+    }
+    else 
+      return false;
+  }
 
+  function validateBet(bet) {
+    if (bet >= 5 && bet <=10)
+      return bet;
+    else {
+      alert('Please place a bet between 5 and 10');
+      $('#bet').val("");
+      $('#bet').focus();
+      return false;
+    }
+  }
+
+  function validateGuess(guess) {
+    if (guess >= 1 && guess <= 10)
+      return guess;
+    else {
+      alert('Please enter a number between 1 and 10');
+      $('#guessNb').val("");
+      $('#guessNb').focus();
+      return false;
+    }
   }
 
   function enoughMoney() {
