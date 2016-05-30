@@ -10,7 +10,7 @@ $(document).ready(function(){
     bankroll: 100,
     bet: 0,
     guessNb: 0
-  }
+  };
   
   $('#btn_bet').on('click',function(){
 
@@ -35,7 +35,7 @@ $(document).ready(function(){
     player.bankroll = 100;
     player.bet = 0;
     player.guessNb = 0;
-    $('#info').text("Game on!")
+    $('#info').text("Game on!");
     $('#bnkSlider').val(player.bankroll);
     $('#bet').val("");
     $('#guessNb').val("");
